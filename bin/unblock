@@ -6,7 +6,7 @@ require 'optparse'
 options = {}
 
 option_parser = OptionParser.new do |opts|
-	opts.banner = "Usage: unblock.rb [options]"
+	opts.banner = "Usage: unblock [options]"
 
 	# Create flag for email address
 	opts.on("-e EMAIL", "Specifiy the email address associated with you unblock-us account") do | email |
