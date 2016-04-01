@@ -9,12 +9,12 @@ option_parser = OptionParser.new do |opts|
 	opts.banner = "Usage: unblock.rb [options]"
 
 	# Create flag for email address
-	opts.on("-e EMAIL") do | email |
+	opts.on("-e EMAIL", "Specifiy the email address associated with you unblock-us account") do | email |
 		options[:email] = email
 	end
 
 	# Create flag for password
-	opts.on("-p PASSWORD") do | password |
+	opts.on("-p PASSWORD", "Specify your unblock-us account password") do | password |
 		options[:password] = password
 	end
 end
