@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'open-uri'
+require 'optparse'
+
+options = {}
+
+option_parser = OptionParser.new do |opts|
+	opts.banner = "Usage: unblock.rb [options]"
+
+	# Create flag for email address
+	opts.on("-e EMAIL") do | email |
+		options[:email] = email
+	end
+
+	# Create flag for password
+	opts.on("-p PASSWORD") do | password |
+		options[:password] = password
+	end
+end
+
+option_parser.parse!
+
+if options[:email]
+	puts "You provided an email of #{ options[:email] }"
+	
+	begin
+		request_url = "https://api.unblock-us.com/login?#{options[:email]}:#{options[:password]}"
+		unblock = open(request_url)
+		
+		case unblock.read
+			when "active"
+				puts "Your IP address has been activated!"
+			when "bad_password"
+				puts "Your password is incorrect!"
+			when "not_found"
+				puts "Cannot find username!"
+		end
+		
+	rescue Exception => e
+		puts "Error: #{e}"
+	end	
+end
